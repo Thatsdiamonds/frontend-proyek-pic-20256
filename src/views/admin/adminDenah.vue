@@ -3,17 +3,17 @@
 <template>
   <!-- Tombol Aksi - Header -->
   <div class="upperButtonMenu marginbttm">
-    <div class="button">
-        <img src="@/icons/drought.svg" alt="Icon" width="auto" height="100%">
+    <div class="button" @click="this.$router.push('/logout');">
+        <img src="/icons/drought.svg" alt="Icon" width="auto" height="100%">
       <div class="text">
-        <a>Kembali</a>
-        <a>Kembali di sini</a>
+        <a>Logout</a>
+        <a>Keluar dari akun Anda</a>
       </div>
     </div>
 
     <div style="display: inline-flex; gap: 1rem;">
       <div class="button" style="--border-color: #0D9C9C">
-          <img src="@/icons/rocket.svg" alt="Icon" width="auto" height="100%">
+          <img src="/icons/rocket.svg" alt="Icon" width="auto" height="100%">
         <div class="text">
           <a>Halaman Add Seller</a>
           <a>Klik di sini untuk berpindah</a>
@@ -21,7 +21,7 @@
       </div>
 
       <div class="button" style="--border-color: #0D9C9C">
-          <img src="@/icons/sunglasses.svg" alt="Icon" width="auto" height="100%">
+          <img src="/icons/sunglasses.svg" alt="Icon" width="auto" height="100%">
         <div class="text">
           <a>Halaman Daftar Pasar</a>
           <a>Klik di sini untuk berpindah</a>
@@ -39,12 +39,12 @@
 
     <div style="display: inline-flex; gap: 1rem;">
       <div class="button" style="--border-color: #15a1c8; --bg-color: #15a1c8; --color: #fff; --bg-hov: #16abd5">
-        <img src="@/icons/save.svg" alt="Icon" width="auto" height="100%">
+        <img src="/icons/save.svg" alt="Icon" width="auto" height="100%">
             <a>TERAPKAN SEMUA PERUBAHAN</a>
       </div>
 
       <div class="button">
-        <img src="@/icons/cancel.svg" alt="Icon" width="auto" height="100%">
+        <img src="/icons/cancel.svg" alt="Icon" width="auto" height="100%">
           <div class="text">
             <a>Batalkan</a>
           </div>
@@ -53,16 +53,16 @@
   </div>
 
   <!-- Layout -->
-  <div class="main-layout">
+  <div class="main-layout equal-height-layout">
     <!-- Area Denah -->
-    <div class="content-container">
+    <div class="content-container equal-height-item" style="overflow: hidden;">
       <div class="content-header marginbttm">
         <div class="content-header-text">
           <h2 class="content-title">Editor Denah Pasar</h2>
           <div class="content-sub">Total sebanyak 16 kios</div>
         </div>
         <div class="button" style="--border-color: #19a7a7; --bg-color: #19a7a7; --color: #fff; --sub-color: #ffffff9a; --bg-hov: #16abd5">
-          <img src="@/icons/cloud.svg" alt="Icon" width="auto" height="100%">
+          <img src="/icons/cloud.svg" alt="Icon" width="auto" height="100%">
           <div class="text">
             <a>Perbarui Denah</a>
           </div>
@@ -75,7 +75,7 @@
       </div>
 
       <div class="denah-tip">
-        <img src="@/icons/pro.svg" alt="Icon" width="auto" height="100%">
+        <img src="/icons/pro.svg" alt="Icon" width="auto" height="100%">
         <div class="tip-text">
           <span class="tip-title">Pro Tip</span>
           <span class="tip-desc">Klik kios dalam denah untuk memilih target pengeditan</span>
@@ -84,16 +84,16 @@
     </div>
 
     <!-- Kios Terdaftar Container -->
-    <div class="content-container" style="flex: 2 0 0; min-width: 340px;">
+    <div class="content-container equal-height-item" style="flex: 2 0 0; min-width: 340px;">
       <div class="content-header marginbttm">
         <div class="content-header-text">
           <h2 class="content-title">Kios Terdaftar</h2>
           <div class="content-sub">Total sebanyak 2 kios telah ditempati</div>
         </div>
         <div class="button" style="--border-color: #19a7a7; --bg-color: #19a7a7; --color: #fff; --sub-color: #ffffff9a; --bg-hov: #16abd5">
-          <img src="@/icons/search.svg" alt="Icon" width="auto" height="100%">
+          <img src="/icons/search.svg" alt="Icon" width="auto" height="100%">
           <div class="text">
-            <a>Cari</a>
+          <a>Cari</a>
           </div>
         </div>
       </div>
@@ -119,6 +119,38 @@
           <img class="kios-img" src="@/img/profile.png" alt="Bu Ngatimni" />
           <div class="kios-info">
             <div class="kios-nama">Mas Amba</div>
+            <div class="kios-desc">Berbagai cairan bahan masak</div>
+          </div>
+          <div class="kios-id">L1_005</div>
+        </div>
+        <div class="kios-item">
+          <img class="kios-img" src="@/img/profile.png" alt="Bu Ngatimni" />
+          <div class="kios-info">
+            <div class="kios-nama">Mas Amba</div>
+            <div class="kios-desc">Berbagai cairan bahan masak</div>
+          </div>
+          <div class="kios-id">L1_005</div>
+        </div>
+        <div class="kios-item">
+          <img class="kios-img" src="@/img/profile.png" alt="Bu Ngatimni" />
+          <div class="kios-info">
+            <div class="kios-nama">Mas Amba</div>
+            <div class="kios-desc">Berbagai cairan bahan masak</div>
+          </div>
+          <div class="kios-id">L1_005</div>
+        </div>
+        <div class="kios-item">
+          <img class="kios-img" src="@/img/profile.png" alt="Bu Ngatimni" />
+          <div class="kios-info">
+            <div class="kios-nama">Mas Amba</div>
+            <div class="kios-desc">Berbagai cairan bahan masak</div>
+          </div>
+          <div class="kios-id">L1_005</div>
+        </div>
+        <div class="kios-item">
+          <img class="kios-img" src="@/img/profile.png" alt="Bu Ngatimni" />
+          <div class="kios-info">
+            <div class="kios-nama">Mas Amba</div>
             <div class="kios-desc">Fent</div>
           </div>
           <div class="kios-id">L1_014</div>
@@ -128,26 +160,28 @@
   </div>
 
   <!-- Konfigurasi Section -->
-  <div class="config-layout">
+  <div class="config-layout equal-height-layout">
     <!-- Konfigurasi Kios -->
-    <div class="content-container">
+    <div class="content-container equal-height-item">
       <div class="content-header marginbttm">
-      <div class="content-header-text">
-        <h2 class="content-title">Konfigurasi Kios</h2>
-        <div class="content-sub">Edit informasi kios terpilih</div>
-      </div>
-      <div class="button" style="--border-color: #030303; --bg-color: transparent; --color: #000; --border-hov: #e57373; --bg-hov: #f8d7da">
-        <img src="@/icons/close.svg" alt="Icon" width="auto" height="100%">
-        <div class="text">
-        <a>Batal</a>
+        <div class="content-header-text">
+          <h2 class="content-title">Konfigurasi Kios</h2>
+          <div class="content-sub">Edit informasi kios terpilih</div>
         </div>
-      </div>
-      <div class="button" style="--border-color: #16abd5; --bg-color: #19a7a7; --color: #fff; --border-hov: #16abd5; --bg-hov: #16abd5">
-        <img src="@/icons/save_pixel.svg" alt="Icon" width="auto" height="100%">
-        <div class="text">
-        <a>Simpan</a>
+        <div style="display: flex; gap: 1rem;">
+          <div class="button" style="--border-color: #030303; --bg-color: transparent; --color: #000; --border-hov: #e57373; --bg-hov: #f8d7da">
+            <img src="/icons/close.svg" alt="Icon" width="auto" height="100%">
+            <div class="text">
+            <a>Batal</a>
+            </div>
+          </div>
+          <div class="button" style="--border-color: #16abd5; --bg-color: #19a7a7; --color: #fff; --border-hov: #16abd5; --bg-hov: #16abd5">
+            <img src="/icons/save_pixel.svg" alt="Icon" width="auto" height="100%">
+            <div class="text">
+            <a>Simpan</a>
+            </div>
+          </div>
         </div>
-      </div>
       </div>
 
       <div class="config-form">
@@ -174,24 +208,26 @@
     </div>
 
     <!-- Konfigurasi Pasar -->
-    <div class="content-container">
+    <div class="content-container equal-height-item">
       <div class="content-header marginbttm">
       <div class="content-header-text">
-        <h2 class="content-title">Konfigurasi Kios</h2>
-        <div class="content-sub">Edit informasi kios terpilih</div>
+        <h2 class="content-title">Konfigurasi Pasar</h2>
+        <div class="content-sub">Edit informasi pasar saat ini</div>
       </div>
-      <div class="button" style="--border-color: #030303; --bg-color: transparent; --color: #000; --border-hov: #e57373; --bg-hov: #f8d7da">
-        <img src="@/icons/close.svg" alt="Icon" width="auto" height="100%">
-        <div class="text">
-        <a>Batal</a>
+        <div style="display: flex; gap: 1rem;">
+          <div class="button" style="--border-color: #030303; --bg-color: transparent; --color: #000; --border-hov: #e57373; --bg-hov: #f8d7da">
+            <img src="/icons/close.svg" alt="Icon" width="auto" height="100%">
+            <div class="text">
+            <a>Batal</a>
+            </div>
+          </div>
+          <div class="button" style="--border-color: #16abd5; --bg-color: #19a7a7; --color: #fff; --border-hov: #16abd5; --bg-hov: #16abd5">
+            <img src="/icons/save_pixel.svg" alt="Icon" width="auto" height="100%">
+            <div class="text">
+            <a>Simpan</a>
+            </div>
+          </div>
         </div>
-      </div>
-      <div class="button" style="--border-color: #16abd5; --bg-color: #19a7a7; --color: #fff; --border-hov: #16abd5; --bg-hov: #16abd5">
-        <img src="@/icons/save_pixel.svg" alt="Icon" width="auto" height="100%">
-        <div class="text">
-        <a>Simpan</a>
-        </div>
-      </div>
       </div>
       <div class="config-form">
         <div class="config-row">
@@ -217,10 +253,11 @@
   </div>
 </template>
 
-<style scoped></style>
-
 <style setup>
 @import '@/styles/button.css';
+body {
+  margin: 2.8rem;
+}
 
 :root {
   --container-border-color: #00000020;
@@ -290,8 +327,6 @@
   display: flex;
   justify-content: space-between;
 }
-
-
 
 .content-container {
   flex: 3 0 0;
@@ -369,6 +404,8 @@
   display: flex;
   flex-direction: column;
   gap: 1rem;
+  height: 100%;
+  overflow-y: scroll;
 }
 
 .kios-item {
@@ -438,8 +475,14 @@
   display: flex;
   gap: 1rem;
   margin-top: 1rem;
-  align-items: flex-start;
-  flex-wrap: wrap;
+  align-items: stretch;
+  flex-wrap: nowrap;
+}
+
+.config-layout > .content-container {
+  flex: 1 1 0;
+  display: flex;
+  flex-direction: column;
 }
 
 .config-header {
@@ -538,5 +581,36 @@
 .config-field input:focus,
 .config-field textarea:focus {
   border-color: #19a7a7;
+}
+
+.equal-height-layout {
+  display: flex;
+  gap: 1rem;
+  align-items: stretch;
+  flex-wrap: nowrap;
+  /* Set a fixed height for desktop view */
+  height: 480px;
+  /* You can adjust 480px as needed for your design */
+}
+
+.equal-height-item {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  min-width: 340px;
+  /* Ensures all items have the same max-height as their siblings */
+  max-height: 100%;
+  box-sizing: border-box;
+  overflow: auto;
+}
+
+/* Optional: Hide scrollbars for a cleaner look */
+.equal-height-item::-webkit-scrollbar {
+  width: 8px;
+  background: #f0f0f0;
+}
+.equal-height-item::-webkit-scrollbar-thumb {
+  background: #d1f3ff;
+  border-radius: 4px;
 }
 </style>

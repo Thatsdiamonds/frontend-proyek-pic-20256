@@ -1,8 +1,16 @@
-<script setup></script>
+<script>
+console.log(localStorage.getItem("role"))
+console.log(localStorage.getItem("token"))
+</script>
 
 <template>
   <router-view />
-  view admin denah : /admin-denah
 </template>
 
-<style scoped></style>
+<style scoped>
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+</style>
