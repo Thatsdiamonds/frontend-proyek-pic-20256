@@ -1,4 +1,5 @@
 import { createApp } from 'vue'
+import { createPinia } from 'pinia'
 import App from './App.vue'
 import router from './router'
 
@@ -8,6 +9,7 @@ import 'vue-toast-notification/dist/theme-bootstrap.css'
 import toast from '@/services/toast'
 
 const app = createApp(App) // CREATE APPPPPPPPPPPPPPPPPPPPPPPPPPPP
+const pinia = createPinia()
 
 // Global error handler Vue 3, biar visible haha bingung lo
 app.config.errorHandler = (err, vm, info) => {
@@ -17,4 +19,5 @@ app.config.errorHandler = (err, vm, info) => {
 
 
 app.use(router)
+app.use(pinia)
 app.mount('#app')

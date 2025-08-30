@@ -1,4 +1,5 @@
 <template>
+  <div class="relative">
     <nav>
         <div class="left">
             <h1>Pasar Owi</h1>
@@ -6,7 +7,9 @@
         </div>
         <div class="right">
             <div style="display: inline-flex; gap: 1rem;">
-              <div class="button" style="--border-color: #19A7A7; --bg-color: transparent;">
+              <div class="button" 
+                   @click="toggleSearch"
+                   style="--border-color: #19A7A7; --bg-color: transparent;">
                 <img src="/icons/lampu_suar.svg" alt="Icon" width="auto" height="100%">
                   <div class="text">
                     <h3>Cari kios...</h3>
@@ -24,80 +27,140 @@
           </div>
         </div>
     </nav>
+  </div>
 
-    <!-- Maps Area -->
-    <div
-      class="maps-area"
-      @mousedown="startDrag"
-      @mousemove="onDrag"
-      @mouseup="endDrag"
-      @mouseleave="endDrag"
-      @wheel.prevent="onWheel"
-    >
-      <div
-        class="absolute top-0 left-0"
-        :style="{
-          transform: `translate(${offset.x}px, ${offset.y}px) scale(${scale})`,
-          transformOrigin: '0 0',
-        }"
-      >
-        <!-- SVG sebagai komponen -->
-        <PasarOwi
-          class="w-full h-full"
-          @click="onSvgClick"
-        />
-      </div>
+  <!-- Maps Area -->
+  <div
+    class="maps-area" 
+      :class="{ dragging: isDragging }"
+    @mousedown="startDrag"
+    @wheel.prevent="onWheel">
+
+    <div 
+      class="absolute top-0 left-0"
+      :style="{
+        transform: `translate(${offset.x}px, ${offset.y}px) scale(${scale})`
+      }">
+
+      <!-- impor SVG ke sini -->
+      <PasarOwi class="w-full h-full"
+        :hoveredRect="hoveredRect"
+        @rect-hover="onRectHover"
+        @rect-out="onRectOut"
+        @click="onSvgClick"
+      />
     </div>
+  </div>
+
+  <!-- Update the side container with transitions -->
+  <div class="sideLeft-container" :class="{ 'visible': isSearchVisible }">
+    <div class="panel">
+      <div class="searchBox">
+        <img src="/icons/searchPixelated.svg" alt="Icon" class="search-icon">
+        <input 
+          v-model="searchText"
+          class="search-text" 
+          placeholder="Cari di Pasar Owi..."
+          @keyup.esc="toggleSearch">
+        <img 
+          src="/icons/close.svg" 
+          alt="Icon" 
+          class="close-icon"
+          @click="clearSearch"
+          :class="{ 'visible': searchText }"
+          title="Clear search">
+      </div>
+            <div class="kios-list">
+            <div class="kios-item kios-item-aktif">
+              <img class="kios-img" src="@/img/profile.png" alt="Bu Ngatimni" />
+              <div class="kios-info">
+                <div class="kios-nama">Bu Ngatimni</div>
+                <div class="kios-desc">Sayur, ikan, daging ayam, dll ahshjibaierywabu aibwyetoau9</div>
+              </div>
+              <div class="kios-id">L1_001</div>
+            </div>
+            <div class="kios-item">
+              <img class="kios-img" src="@/img/profile.png" alt="Bu Ngatimni" />
+              <div class="kios-info">
+                <div class="kios-nama">Mas Amba</div>
+                <div class="kios-desc">Berbagai cairan bahan masak</div>
+              </div>
+              <div class="kios-id">L1_005</div>
+            </div>
+            <div class="kios-item">
+              <img class="kios-img" src="@/img/profile.png" alt="Bu Ngatimni" />
+              <div class="kios-info">
+                <div class="kios-nama">Mas Amba</div>
+                <div class="kios-desc">Berbagai cairan bahan masak</div>
+              </div>
+              <div class="kios-id">L1_005</div>
+            </div>
+            <div class="kios-item">
+              <img class="kios-img" src="@/img/profile.png" alt="Bu Ngatimni" />
+              <div class="kios-info">
+                <div class="kios-nama">Mas Amba</div>
+                <div class="kios-desc">Berbagai cairan bahan masak</div>
+              </div>
+              <div class="kios-id">L1_005</div>
+            </div>
+            <div class="kios-item">
+              <img class="kios-img" src="@/img/profile.png" alt="Bu Ngatimni" />
+              <div class="kios-info">
+                <div class="kios-nama">Mas Amba</div>
+                <div class="kios-desc">Berbagai cairan bahan masak</div>
+              </div>
+              <div class="kios-id">L1_005</div>
+            </div>
+            <div class="kios-item">
+              <img class="kios-img" src="@/img/profile.png" alt="Bu Ngatimni" />
+              <div class="kios-info">
+                <div class="kios-nama">Mas Amba</div>
+                <div class="kios-desc">Berbagai cairan bahan masak</div>
+              </div>
+              <div class="kios-id">L1_005</div>
+            </div>
+            <div class="kios-item">
+              <img class="kios-img" src="@/img/profile.png" alt="Bu Ngatimni" />
+              <div class="kios-info">
+                <div class="kios-nama">Mas Amba</div>
+                <div class="kios-desc">Fent</div>
+              </div>
+              <div class="kios-id">L1_014</div>
+            </div>
+            <div class="kios-item">
+              <img class="kios-img" src="@/img/profile.png" alt="Bu Ngatimni" />
+              <div class="kios-info">
+                <div class="kios-nama">Mas Amba</div>
+                <div class="kios-desc">Fent</div>
+              </div>
+              <div class="kios-id">L1_014</div>
+            </div>
+            <div class="kios-item">
+              <img class="kios-img" src="@/img/profile.png" alt="Bu Ngatimni" />
+              <div class="kios-info">
+                <div class="kios-nama">Mas Amba</div>
+                <div class="kios-desc">Fent</div>
+              </div>
+              <div class="kios-id">L1_014</div>
+            </div>
+            <div class="kios-item">
+              <img class="kios-img" src="@/img/profile.png" alt="Bu Ngatimni" />
+              <div class="kios-info">
+                <div class="kios-nama">Mas Amba</div>
+                <div class="kios-desc">Fent</div>
+              </div>
+              <div class="kios-id">L1_014</div>
+            </div>
+          </div>
+    </div>
+  </div>
+
+  <div class="sideRight-container" :class="{ 'visible': isSearchVisible }">
+    <div class="panel">
+      Hi
+    </div>
+  </div>
 </template>
-
-<script setup>
-import { ref } from "vue";
-import PasarOwi from "@/img/pasar-owi.svg";
-
-// zoom & drag state
-const scale = ref(1);
-const offset = ref({ x: 0, y: 0 });
-const isDragging = ref(false);
-const lastMouse = ref({ x: 0, y: 0 });
-
-function startDrag(e) {
-  isDragging.value = true;
-  lastMouse.value = { x: e.clientX, y: e.clientY };
-}
-
-function onDrag(e) {
-  if (!isDragging.value) return;
-  const dx = e.clientX - lastMouse.value.x;
-  const dy = e.clientY - lastMouse.value.y;
-  offset.value.x += dx;
-  offset.value.y += dy;
-  lastMouse.value = { x: e.clientX, y: e.clientY };
-}
-
-function endDrag() {
-  isDragging.value = false;
-}
-
-function onWheel(e) {
-  const zoomIntensity = 0.1;
-  if (e.deltaY < 0) scale.value += zoomIntensity;
-  else if (e.deltaY > 0 && scale.value > zoomIntensity)
-    scale.value -= zoomIntensity;
-}
-
-function resetView() {
-  scale.value = 1;
-  offset.value = { x: 0, y: 0 };
-}
-
-function onSvgClick(e) {
-  // ambil elemen yang diklik (misal <rect id="L1_001">)
-  const targetId = e.target.id;
-  if (targetId) {
-    alert(`Kios ${targetId} diklik!`);
-  }
-}
-</script>
 
 <style scoped>
 @font-face {
@@ -131,30 +194,45 @@ function onSvgClick(e) {
   margin: 0;
 }
 
-:global(html), :global(body), :global(#app) {
-  height: 100%;
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
+.relative {
+  position: relative;
+  top: 2rem;
+  width: 100%;
+  display: flex;
+  justify-content: center;
 }
 
-/* Navbar selalu di atas */
 nav {
-  z-index: 99;
+  z-index: 2;
   display: flex;
   justify-content: space-between;
   align-items: center;
   border: 2px solid black;
-  padding: 1.8rem;
-  margin: 2.8rem;
+  background: rgba(255, 255, 255, 0.35);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  box-shadow: 0 4px 24px 0 rgba(0,0,0,0.08);  
+  padding: 1.2rem;
+  width: 96%;
   box-sizing: border-box;
 }
 
 .maps-area {
-  width: 100vw;
-  height: 100vh;
+  height: 100%;
+  width: 100%;
   overflow: hidden;
-  background: #f3f3f3;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: absolute;
+  top: 0;
+  left: 0;
+  cursor: grab;
+  transition: cursor 0.1s;
+}
+
+.maps-area.dragging {
+  cursor: grabbing;
 }
 
 nav .left {
@@ -237,4 +315,261 @@ nav .right .text {
   display: flex;
   flex-direction: column;
 }
+
+html {
+  overflow: hidden;
+}
+
+.sideLeft-container {
+  position: absolute;
+  top: 0;
+  left: 0;
+  min-width: 20%;
+  max-width: 30%;
+  height: 91dvh;
+  z-index: 3;
+  transform: translateX(-100%);
+  transition: transform 0.3s ease-out;
+}
+
+.sideLeft-container.visible {
+  transform: translateX(0);
+}
+
+.sideRight-container {
+  position: absolute;
+  top: 0;
+  right: 0;
+  min-width: 20%;
+  max-width: 30%;
+  height: 91dvh;
+  z-index: 3;
+  transform: scale(0);
+  transition: all 0.3s ease-out;
+}
+
+.sideRight-container.visible {
+  transform: scale(1);
+}
+
+.panel {
+  padding: 1.4rem;
+  height: 100%;
+  overflow: hidden;
+  background: rgba(255, 255, 255, 0.35);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  box-shadow: 0 4px 24px 0 rgba(0,0,0,0.08);  
+}
+.searchBox {
+  height: 2.4rem;
+  padding: 0 .4rem;
+  margin-bottom: 2rem;
+  border: 1px solid black;
+  display: flex;
+  align-items: center;
+  gap: .7rem;
+}
+
+.search-icon {
+  height: 1.5rem;
+  width: 1.5rem;
+  opacity: 70%;
+}
+
+.close-icon {
+  height: 1.7rem;
+  width: 1.7rem;
+  margin-left: auto;
+  opacity: 0;
+  cursor: pointer;
+  transition: opacity 0.2s ease;
+}
+
+.close-icon.visible {
+  opacity: 0.7;
+}
+
+.close-icon:hover {
+  opacity: 1;
+}
+
+.search-text {
+  all: unset;
+  font-family: 'Minecraft Standard', sans-serif;
+  font-size: .8rem;
+  line-height: 1.2;
+  flex: 1;
+  width: 100%;
+}
+
+.search-text:focus {
+  outline: none;
+  background: rgba(255, 255, 255, 0.2);
+}
+
+.kios-list {
+  padding-right: 1rem;
+  display: flex;
+  flex-direction: column;
+  gap: .8rem;
+  height: 80dvh;
+  overflow-y: scroll;
+}
+
+.kios-item {
+  display: flex;
+  align-items: center;
+  padding: .4rem .4rem;
+  border-left: 6px solid #d3d3d3;
+  transition: border-color 0.2s, background 0.2s, box-shadow 0.2s;
+  cursor: pointer;
+  border-radius: 6px;
+  outline: none;
+  user-select: none;
+}
+.kios-item:hover > .kios-info,
+.kios-item:focus > .kios-info {
+  transform: translateX(2px);
+}
+
+.kios-item-aktif {
+  border-left: 6px solid #15a1c8;
+}
+
+.kios-img {
+  width: 38px;
+  height: auto;
+  object-fit: cover;
+  border-radius: 2px;
+  margin-right: 1rem;
+}
+
+.kios-info {
+  flex: 1;
+  width: fit-content;
+  width: 60%;
+  display: flex;
+  flex-direction: column;
+  transition: all 0.2s ease-in-out;
+}
+
+.kios-nama {
+  all: unset;
+  width: fit-content;
+  font-family: 'Minecraft', 'Pixel Operator', sans-serif;
+  font-size: 1rem;
+}
+
+.kios-desc {
+  all: unset;
+  width: fit-content;
+  font-family: 'Pixel Operator', sans-serif;
+  font-size: 1rem;
+  width: 100%;
+  opacity: 0.6;
+  margin-right: 1rem;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+
+}
+
+.kios-id {
+  all: unset;
+  width: fit-content;
+  font-family: 'Minecraft Standard', sans-serif;
+  font-size: .6rem;
+  font-weight: bold;
+  color: #222;
+}
+
 </style>
+
+<script setup>
+import { ref } from "vue";
+import PasarOwi from "./admin/PasarOwi.vue";
+import api from "@/services/api";
+
+// zoom & drag state
+const kiosData = ref(null);
+const scale = ref(1);
+const offset = ref({ x: -20, y: 70 });
+const isDragging = ref(false);
+const lastMouse = ref({ x: 0, y: 0 });
+const hoveredRect = ref(null);
+const searchText = ref('');
+const isSearchVisible = ref(false);
+
+function startDrag(e) {
+  isDragging.value = true;
+  lastMouse.value = { x: e.clientX, y: e.clientY };
+  window.addEventListener("mousemove", onDrag);
+  window.addEventListener("mouseup", endDrag);
+}
+
+function onDrag(e) {
+  if (!isDragging.value) return;
+  const dx = e.clientX - lastMouse.value.x;
+  const dy = e.clientY - lastMouse.value.y;
+  offset.value = {
+    x: offset.value.x + dx,
+    y: offset.value.y + dy,
+  };
+  lastMouse.value = { x: e.clientX, y: e.clientY };
+}
+
+function endDrag() {
+  isDragging.value = false;
+  window.removeEventListener("mousemove", onDrag);
+  window.removeEventListener("mouseup", endDrag);
+}
+
+function onWheel(e) {
+  const zoomIntensity = 0.1;
+  if (e.deltaY < 0) scale.value += zoomIntensity;
+  else if (e.deltaY > 0 && scale.value > zoomIntensity)
+    scale.value -= zoomIntensity;
+}
+
+function resetView() {
+  scale.value = 1;
+  offset.value = { x: 0, y: 70 };
+}
+
+////////////////////////////////////// GET THE KIOS /////////////////////////////////
+// async function onSvgClick(e) {
+//   const targetId = e.target.id;
+//   if (!targetId) return;
+
+//   console.log(`Kios ${targetId} diklik!`);
+
+//   try {
+//     const res = await api.get(`/kios`, {
+//       params: { id: targetId },
+//       silent: true,
+//     });
+
+//     kiosData.value = res.data;
+
+//     console.log("Data kios:", res.data);
+//   } catch (err) {
+//     console.error("Error ambil kios:", err);
+//   }
+// }
+
+function onRectHover(id) {
+  hoveredRect.value = id;
+}
+function onRectOut() {
+  hoveredRect.value = null;
+}
+
+function clearSearch() {
+  searchText.value = '';
+}
+
+function toggleSearch() {
+  isSearchVisible.value = !isSearchVisible.value;
+}
+</script>
