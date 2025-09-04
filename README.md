@@ -1,29 +1,35 @@
-# frontEnd
+# Pasar Owi - Frontend Application
 
-This template should help get you started developing with Vue 3 in Vite.
+## Fitur Denah Interaktif
 
-## Recommended IDE Setup
+### Sistem State Marked-Down
+Aplikasi ini memiliki sistem denah interaktif dengan tiga state marked-down:
 
-[VSCode](https://code.visualstudio.com/) + [Volar](https://marketplace.visualstudio.com/items?itemName=Vue.volar) (and disable Vetur).
+1. **NONE** - State default tanpa highlight
+2. **HOVER** - State saat mouse hover di atas kios (biru dengan scale 1.02)
+3. **SELECTED** - State saat kios dipilih dari pencarian (orange dengan scale 1.05 dan glow effect)
 
-## Customize configuration
+### Fitur Centering Otomatis
+- Saat pengguna memilih kios tertentu dari pencarian (contoh: lokasi L001)
+- Sistem otomatis menandai (marked-down) kios tersebut pada denah
+- Posisi kios yang dipilih akan berada di tengah layar secara otomatis
+- Tidak ada animasi untuk performa yang lebih baik
 
-See [Vite Configuration Reference](https://vite.dev/config/).
+### Cara Penggunaan
+1. Buka panel pencarian dengan tombol "Cari kios..." atau tekan "/"
+2. Ketik nama atau lokasi kios yang ingin dicari
+3. Klik pada kios dari hasil pencarian
+4. Sistem akan otomatis:
+   - Menampilkan detail kios
+   - Menandai kios pada denah
+   - Memindahkan view ke tengah kios yang dipilih
 
-## Project Setup
+### Komponen yang Terlibat
+- `PasarOwi.vue` - Komponen SVG denah dengan state management
+- `index.vue` - Halaman utama dengan integrasi pencarian dan centering
 
-```sh
-npm install
-```
-
-### Compile and Hot-Reload for Development
-
-```sh
-npm run dev
-```
-
-### Compile and Minify for Production
-
-```sh
-npm run build
-```
+## Teknologi
+- Vue 3 Composition API
+- SVG manipulation
+- Responsive design
+- State management dengan reactive refs

@@ -37,8 +37,8 @@
                 <small>Belum punya akun? <a href="/register">Daftar di sini</a></small>
             </div>
             <div class="text-center mt-3">
-                <a href="#" @click.prevent="fillAdmin" class="me-2">Isi Admin</a>
-                <a href="#" @click.prevent="fillSeller">Isi Seller</a>
+                <a href="#" @click.prevent="fillAdmin" class="me-2" onclick="return false">Isi Admin</a>
+                <a href="#" @click.prevent="fillSeller" onclick="return false">Isi Seller</a>
             </div>
         </div>
     </div>
@@ -84,9 +84,8 @@ export default {
                         console.warn("Gagal revoke token lama:", logoutErr);
                     }
 
-                    // Hapus token & role dari localStorage
+                    // Hapus token dari localStorage (role dan user_id tidak perlu disimpan)
                     localStorage.removeItem("token");
-                    localStorage.removeItem("role");
                 }
 
                 // 🚀 Login baru
@@ -95,12 +94,12 @@ export default {
                     password: this.password,
                 });
 
+                // Hanya simpan token, role dan user_id akan diambil dari backend saat diperlukan
                 localStorage.setItem("token", response.data.token);
-                localStorage.setItem("role", response.data.role);
 
                 toast.success("Login berhasil!");
 
-                // Redirect sesuai role
+                // Redirect sesuai role dari response backend
                 if (response.data.role === "admin") {
                     this.$router.push("/admin");
                 } else if (response.data.role === "seller") {

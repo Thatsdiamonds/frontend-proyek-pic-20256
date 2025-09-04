@@ -55,9 +55,9 @@
                 <button type="submit" class="btn btn-success w-100">Register</button>
             </form>
 
-            <div class="text-center mt-3">
+            <!-- <div class="text-center mt-3">
                 <small>Sudah punya akun? <router-link to="/login">Login di sini</router-link></small>
-            </div>
+            </div> -->
         </div>
     </div>
 </template>

@@ -1,6 +1,6 @@
 <script>
-console.log(localStorage.getItem("role"))
-console.log(localStorage.getItem("token"))
+// Token-based authentication - role and user data will be fetched from backend when needed
+console.log("App initialized - using token-based auth")
 </script>
 
 <template>
