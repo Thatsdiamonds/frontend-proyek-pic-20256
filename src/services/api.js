@@ -56,6 +56,40 @@ export const getUserProfile = async () => {
   }
 };
 
+export const updateMyKios = async (formData) => {
+  try {
+    const response = await api.post('/my-kios?_method=PUT', formData, {
+      headers: {
+        "Content-Type": "multipart/form-data",
+      },
+    });
+    return response.data;
+  } catch (error) {
+    console.error("Error updating kios:", error);
+    throw error;
+  }
+};
+
+export const getSellerProfile = async () => {
+  try {
+    const response = await api.get('/my-kios', { silent: true });
+    return response.data;
+  } catch (error) {
+    console.error('Error fetchin seller profile:', error);
+    throw error;
+  }
+}
+
+export const getAllSellerProfile = async () => {
+  try {
+    const response = await api.get('/penjual', { silent: true });
+    return response.data;
+  } catch (error) {
+    console.error('Error fetchin seller profile:', error);
+    throw error;
+  }
+}
+
 export const getUserRole = async () => {
   try {
     const response = await api.get('/user/profile', { silent: true });

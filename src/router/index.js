@@ -61,6 +61,12 @@ const router = createRouter({
       component: () => import('@/views/seller/dashboard.vue'),
       meta: { roles: ['seller', 'admin'] }  // khusus seller?
     },
+    {
+      path: "/my-kios/update",
+      name: "UpdateKios",
+      component: () => import('@/views/seller/update-kios.vue'),
+      meta: { roles: ['seller'] }
+    },
   ],
 })
 

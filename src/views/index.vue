@@ -103,7 +103,17 @@
                 :class="{ 'kios-item-aktif': selectedPenjual && selectedPenjual.id === penjual.id }"
                 @click="selectKiosFromSearch(penjual)"
               >
-                <img class="kios-img" :src="penjual.foto_profil || '/icons/profile.svg'" :alt="penjual.nama" />
+                <img 
+                :src="penjual.foto_profil_url || '/icons/profile.svg'" 
+                :alt="penjual.nama" 
+                style="width: 50px;"
+                />
+                <!-- <img 
+                :src="penjual.foto_profil_url || '/icons/profile.svg'" 
+                :alt="penjual.nama" 
+                style="width: 50px;"
+                /> -->
+                <!-- <img class="kios-img" :src="penjual.foto_profil || '/icons/profile.svg'" :alt="penjual.nama" /> -->
                 <div class="kios-info">
                   <div class="kios-nama">{{ penjual.nama }}</div>
                   <div class="kios-desc">{{ penjual.produk || penjual.lokasi || 'Tidak ada informasi produk' }}</div>
@@ -849,6 +859,7 @@ import { ref, onMounted, onUnmounted, computed, watch } from "vue";
 import toast from "@/services/toast";
 import PasarOwi from "./admin/PasarOwi.vue";
 import api from "@/services/api";
+import { getAllSellerProfile } from "@/services/api";
 import { useRouter } from "vue-router";
 
 const sudahHintWkwkwk = ref(false);
@@ -935,16 +946,31 @@ function resetView() {
 
 ////////////////////////////////////// MENGAMBIL DATA KIOS /////////////////////////////////
 // Ambil semua data penjual dari API
+// async function fetchAllPenjual() {
+//   isLoading.value = true;
+//   try {
+//     const res = await api.get('/penjual', { silent: true });
+//     // Ambil data dari response API, handle struktur data yang berbeda
+//     penjualList.value = res.data.data || res.data;
+//     console.log("Data penjual berhasil diambil:", penjualList.value);
+//   } catch (err) {
+//     console.error("Error mengambil data penjual:", err);
+//     toast.error("Gagal mengambil data penjual");
+//   } finally {
+//     isLoading.value = false;
+//   }
+// }
+
 async function fetchAllPenjual() {
   isLoading.value = true;
   try {
-    const res = await api.get('/penjual', { silent: true });
-    // Ambil data dari response API, handle struktur data yang berbeda
-    penjualList.value = res.data.data || res.data;
-    console.log("Data penjual berhasil diambil:", penjualList.value);
+    const res = await getAllSellerProfile(); 
+    // res harusnya sudah berupa array dari API (semua penjual)
+    penjualList.value = res;  
+    console.log("Data kios berhasil diambil:", penjualList.value);
   } catch (err) {
-    console.error("Error mengambil data penjual:", err);
-    toast.error("Gagal mengambil data penjual");
+    console.error("Error mengambil data kios:", err);
+    toast.error("Gagal mengambil data kios");
   } finally {
     isLoading.value = false;
   }
