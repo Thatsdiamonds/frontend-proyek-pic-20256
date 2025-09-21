@@ -1,60 +1,74 @@
 <template>
-  <div class="p-4">
-    <h1>Seller Dashboard</h1>
-    <p>Welcome seller! 🎉</p>
-
-    <router-link to="/my-kios/update" class="bg-blue-500 text-white px-4 py-2 rounded">Update Kios</router-link>
-    
-    <div v-if="userProfile" class="mt-3">
-      <h3>User Information (from Backend)</h3>
-      <p><strong>Username:</strong> {{ userProfile.username }}</p>
-      <p><strong>Email:</strong> {{ userProfile.email }}</p>
-      <p><strong>Role:</strong> {{ userProfile.role }}</p>
-      <p><strong>ID:</strong> {{ userProfile.id }}</p>
+        <router-link 
+            to="/my-kios/update" 
+            class="bg-blue-500 text-white px-4 py-2 rounded">
+            Update Kios
+        </router-link>
+<div class="info-container">
+        <div class="container-top">
+            <div class="title-page">
+                <h2>Info KIOS</h2>
+            </div>
+            <div class="desc-page">
+                <p>Halaman untuk melihat informasi kios</p>
+            </div>
+            <div class="kios-image">
+                <img
+                    v-if="shopProfile?.foto_kios_url"
+                    :src="shopProfile.foto_kios_url"
+                    alt="Foto Kios"
+                    width="100px"
+                    class="w-full h-64 object-cover rounded-lg shadow"
+                />
+            </div>
+        </div>
+        <div class="container-bottom">
+            <div class="container-form">
+                <div class="top-form">
+                    <div class="profile">
+                        <div class="img-profile">
+                            <img
+                                v-if="shopProfile?.foto_profil_url"
+                                :src="shopProfile.foto_profil_url"
+                                alt="Foto Profil"
+                                class="w-20 h-20 object-cover border rounded-full"
+                            />
+                        </div>
+                        <div class="info-profile">
+                            <p>{{ shopProfile?.nama }}</p>
+                            <p>{{ shopProfile?.lokasi }}</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-profile">
+                <form action="">
+                    <div class="form-grid">
+                        <div>
+                            <label for="nama">nama</label>
+                            <input type="text" id="nama" name="" disabled :placeholder="shopProfile?.nama">
+                        </div>
+                        <div>
+                            <label for="deskripsi">deskripsi</label>
+                            <input type="text" id="deskripsi" name="" disabled :placeholder="shopProfile?.deskripsi || '-'">
+                        </div>
+                        <div>
+                            <label for="patokan">patokan</label>
+                            <input type="text" id="patokan" name="" disabled :placeholder="shopProfile?.patokan || '-'">
+                        </div>
+                        <div>
+                            <label for="produk">produk</label>
+                            <input type="text" id="produk" name="" disabled :placeholder="shopProfile?.produk || '-'">
+                        </div>
+                        <div>  
+                            <label for="kontak">kontak</label>
+                            <input type="text" id="kontak" name="" disabled :placeholder="shopProfile?.kontak || '-'">
+                        </div>
+                    </div>
+                </form>
+                </div>
+            </div>
+        </div>
     </div>
-    
-    <div v-if="shopProfile" class="mt-3">
-      <h3>Shop Information</h3>
-      <p><strong>Name:</strong> {{ shopProfile.nama }}</p>
-      <p><strong>Shop ID:</strong> {{shopProfile.id}}</p>
-      <p><strong>Shop Description:</strong> {{shopProfile.deskripsi}}</p>
-      <p><strong>Shop Product:</strong> {{shopProfile.produk}}</p>
-      <p><strong>Shop Contact:</strong> {{shopProfile.kontak}}</p>
-      <p><strong>Shop Location:</strong> {{shopProfile.lokasi}}</p>
-      <p><strong>Shop Patokan:</strong> {{shopProfile.patokan}}</p>
-
-      <div class="mt-2">
-        <strong>Seller Photo:</strong><br />
-        <img 
-          v-if="shopProfile.foto_profil_url" 
-          :src="shopProfile.foto_profil_url" 
-          alt="Foto Profil" 
-          class="w-32 h-32 object-cover border rounded-full"
-        />
-        <p v-else>Tidak ada foto profil</p>
-      </div>
-
-      <div class="mt-2">
-        <strong>Shop Photo:</strong><br />
-        <img 
-          v-if="shopProfile.foto_kios_url" 
-          :src="shopProfile.foto_kios_url" 
-          alt="Foto Kios" 
-          class="w-40 h-40 object-cover border rounded"
-        />
-        <p v-else>Tidak ada foto kios</p>
-      </div>
-    </div>
-
-    <div v-if="loading" class="mt-3">
-      <p>Loading user data...</p>
-    </div>
-    
-    <div v-if="error" class="mt-3 text-danger">
-      <p>Error: {{ error }}</p>
-    </div>
-    
-  </div>
 </template>
 
 <script>
@@ -118,3 +132,141 @@ export default {
   }
 }
 </script>
+
+<style>
+*{
+    margin: 0;
+    padding: 0;
+}
+
+.update-container{
+    padding: 10px;
+    margin: 2rem;
+}
+
+.info-container{
+    padding: 10px;
+    margin: 2rem;
+}
+
+.preview-img {
+    width: 100%;
+    max-height: 200px;
+    object-fit: cover;
+    border-radius: 12px;
+    border: 1px solid #ccc;
+    margin-top: 5px;
+}
+
+.container-top{
+    display: flex;
+    justify-content: center;
+    align-items: stretch;
+}
+
+.title-page{
+    /* background: tomato; */
+    text-orientation: upright;
+    writing-mode: vertical-lr;
+    font-family: "MyCustomFont", sans-serif;
+    color: aquamarine;
+    font-weight: bold;
+}
+
+.title-page h2{
+    margin: 0;
+}
+
+.desc-page{
+    width: min-content;
+    margin-right: 2rem;
+    margin-top: 10px;
+}
+
+.kios-image{
+    flex: 1;
+    width: auto;
+    height: 450px;
+    border: 1px solid black;
+    border-radius: 12px;
+}
+
+.kios-image img {
+    border-radius: 12px;
+}
+
+.container-bottom {
+    display: flex;
+    justify-content: center;
+    font-family: "MyCustomFont", sans-serif;
+    font-size: x-small;
+}
+
+.info-container .container-top {
+    display: flex;
+    margin-bottom: 2rem;
+}
+
+.container-form {
+    border: 1px solid black;   
+    border-radius: 22px;
+    padding: 20px;
+    width: 100%;
+}
+
+.desc-page p {
+    font-family: "Pixel Operator", sans-serif;
+    font-weight: bold;
+}
+
+.profile {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+.img-profile {
+    width: 80px;
+    height: 80px;
+    border-radius: 12px;
+    overflow: hidden;
+}
+
+.info-profile p {
+    margin: 0;
+}
+
+img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.form-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 15px 20px;
+}
+
+.form-grid label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: bold;
+}
+
+
+.form-grid input {
+    width: 100%;
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    font-size: 14px;
+    box-sizing: border-box;
+}
+
+@media (max-width: 600px) {
+    .form-grid {
+        grid-template-columns: 1fr;
+    }
+}
+</style>
